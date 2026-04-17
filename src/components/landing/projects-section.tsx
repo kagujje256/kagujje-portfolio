@@ -97,7 +97,7 @@ export function ProjectsSection({ projects, section }: Props) {
                   )}
                   <Link href={`/projects/${project.slug}`}
                     className="ml-auto text-sm text-[var(--text-secondary)] hover:text-[var(--accent)]">
-                    Details ->
+                    Details →
                   </Link>
                 </div>
               </div>

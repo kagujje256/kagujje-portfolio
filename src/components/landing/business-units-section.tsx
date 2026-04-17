@@ -71,7 +71,7 @@ export function BusinessUnitsSection({ units, section }: Props) {
                     {unit.description}
                   </p>
                   <span className="text-sm text-[var(--accent)] opacity-0 transition-opacity group-hover:opacity-100">
-                    Visit ->
+                    Visit →
                   </span>
                 </div>
               </a>

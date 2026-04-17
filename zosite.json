@@ -1,0 +1,9 @@
+{
+  "name": "kagujje-portfolio",
+  "version": "1.0.0",
+  "entrypoint": "bun run start",
+  "buildCommand": "bun run build",
+  "installCommand": "bun install",
+  "port": 3000,
+  "public": true
+}
