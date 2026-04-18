@@ -1,33 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { useState } from "react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/lib/theme-context";
 
 const navLinks = [
-  { href: "/about", label: "About" },
-  { href: "/#ventures", label: "Ventures" },
-  { href: "/#projects", label: "Projects" },
-  { href: "/#writings", label: "Writings" },
-  { href: "/testimonials", label: "Reviews" },
-  { href: "/faq", label: "FAQ" },
-  { href: "/#contact", label: "Contact" },
+  { href: "#about", label: "About" },
+  { href: "#ventures", label: "Ventures" },
+  { href: "#projects", label: "Projects" },
+  { href: "#writings", label: "Writings" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <nav className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-black/95 backdrop-blur-lg border-b border-zinc-800" : "bg-transparent"}`}>
+    <nav className="glass fixed top-0 z-50 w-full">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link
           href="/"
@@ -37,55 +28,73 @@ export function Navbar() {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden items-center gap-6 lg:flex">
+        <div className="hidden items-center gap-6 md:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-zinc-400 transition-colors hover:text-[var(--accent)]"
+              className="text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"
             >
               {link.label}
             </a>
           ))}
+          
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="rounded-full p-2 text-[var(--text-secondary)] transition-all hover:bg-[var(--bg-tertiary)] hover:text-[var(--accent)]"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+          
           <a
             href="mailto:dicksonkagujje@gmail.com"
-            className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-[var(--accent-hover)]"
+            className="rounded-full bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-[var(--bg-primary)] transition-all hover:opacity-90"
           >
             Hire Me
           </a>
         </div>
 
         {/* Mobile Toggle */}
-        <button
-          className="text-zinc-400 lg:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          <button
+            onClick={toggleTheme}
+            className="rounded-full p-2 text-[var(--text-secondary)] transition-all hover:bg-[var(--bg-tertiary)]"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+          <button
+            className="text-[var(--text-secondary)]"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       {open && (
-        <div className="border-t border-zinc-800 bg-black lg:hidden">
+        <div className="border-t border-[var(--border)] bg-[var(--bg-secondary)] md:hidden">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="block px-6 py-3 text-sm text-zinc-400 transition-colors hover:bg-zinc-900 hover:text-[var(--accent)]"
+              className="block px-6 py-3 text-sm text-[var(--text-secondary)] transition-colors hover:bg-[var(--bg-tertiary)] hover:text-[var(--accent)]"
             >
               {link.label}
             </a>
           ))}
-          <div className="p-4">
-            <a
-              href="mailto:dicksonkagujje@gmail.com"
-              className="block w-full rounded-lg bg-[var(--accent)] py-3 text-center text-sm font-semibold text-black"
-            >
-              Hire Me
-            </a>
-          </div>
+          <a
+            href="mailto:dicksonkagujje@gmail.com"
+            className="block px-6 py-3 text-sm font-semibold text-[var(--accent)]"
+            onClick={() => setOpen(false)}
+          >
+            Hire Me
+          </a>
         </div>
       )}
     </nav>
