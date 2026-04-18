@@ -6,6 +6,7 @@ import { BusinessUnitsSection } from "@/components/landing/business-units-sectio
 import { WritingsSection } from "@/components/landing/writings-section";
 import { ContactSection } from "@/components/landing/contact-section";
 import { Footer } from "@/components/landing/footer";
+import { TelegramChat } from "@/components/landing/telegram-chat";
 import type {
   Profile, SocialLink, Project, Writing,
   BusinessUnit, PageSection, SiteSettings,
@@ -47,7 +48,7 @@ export default async function HomePage() {
   const { profile, links, projects, writings, units, sections, settings } = await getData();
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-black">
       <Navbar />
       <Hero profile={profile} links={links} section={sections.hero || null} settings={settings} />
       <BusinessUnitsSection units={units} section={sections.business_units || null} />
@@ -55,6 +56,7 @@ export default async function HomePage() {
       <WritingsSection writings={writings} section={sections.writings || null} />
       <ContactSection profile={profile} section={sections.contact || null} />
       <Footer section={sections.footer || null} settings={settings} />
+      <TelegramChat />
     </main>
   );
 }
