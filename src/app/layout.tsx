@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
-import { ThemeProvider } from "@/lib/theme-context";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <head>
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap"
@@ -31,10 +30,9 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  var theme = localStorage.getItem('kagujje-theme');
-                  if (theme) {
-                    document.documentElement.classList.add(theme);
-                  }
+                  var theme = localStorage.getItem('kagujje-theme') || 'dark';
+                  document.documentElement.classList.remove('light', 'dark');
+                  document.documentElement.classList.add(theme);
                 } catch (e) {}
               })();
             `,
@@ -42,19 +40,17 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <ThemeProvider>
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              style: {
-                background: "var(--bg-secondary)",
-                color: "var(--text-primary)",
-                border: "1px solid var(--border)",
-              },
-            }}
-          />
-          {children}
-        </ThemeProvider>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            style: {
+              background: "var(--bg-secondary)",
+              color: "var(--text-primary)",
+              border: "1px solid var(--border)",
+            },
+          }}
+        />
+        {children}
       </body>
     </html>
   );
