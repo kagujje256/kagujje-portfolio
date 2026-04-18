@@ -152,15 +152,6 @@ export function Hero({ profile, links, section, settings }: HeroProps) {
             </span>
           )}
         </div>
-
-        {/* Scroll indicator */}
-        <a 
-          href="#ventures" 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--text-secondary)] animate-bounce"
-        >
-          <span className="text-xs tracking-widest">SCROLL</span>
-          <ArrowDown size={16} />
-        </a>
       </div>
     </section>
   );
