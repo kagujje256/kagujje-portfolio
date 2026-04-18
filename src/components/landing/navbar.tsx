@@ -5,11 +5,13 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#ventures", label: "Ventures" },
-  { href: "#projects", label: "Projects" },
-  { href: "#writings", label: "Writings" },
-  { href: "#contact", label: "Contact" },
+  { href: "/about", label: "About" },
+  { href: "/#ventures", label: "Ventures" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#writings", label: "Writings" },
+  { href: "/testimonials", label: "Reviews" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function Navbar() {
@@ -20,55 +22,42 @@ export function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <nav 
-      className={`fixed top-0 z-50 w-full transition-all duration-500 ${
-        scrolled 
-          ? "bg-[var(--bg-primary)]/95 backdrop-blur-xl border-b border-[var(--border)] shadow-lg" 
-          : "bg-transparent"
-      }`}
-    >
+    <nav className={`fixed top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-black/95 backdrop-blur-lg border-b border-zinc-800" : "bg-transparent"}`}>
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link
           href="/"
-          className={`font-['Playfair_Display'] text-2xl font-bold tracking-wider transition-all duration-300 ${
-            scrolled ? "text-[var(--accent)]" : "text-[var(--accent)]"
-          }`}
+          className="font-['Playfair_Display'] text-2xl font-bold tracking-wider text-[var(--accent)]"
         >
           KAGUJJE
         </Link>
 
         {/* Desktop */}
-        <div className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link, i) => (
+        <div className="hidden items-center gap-6 lg:flex">
+          {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="relative text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)] group"
-              style={{ animationDelay: `${i * 50}ms` }}
+              className="text-sm font-medium text-zinc-400 transition-colors hover:text-[var(--accent)]"
             >
               {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[var(--accent)] transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
+          <a
+            href="mailto:dicksonkagujje@gmail.com"
+            className="rounded-lg bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-black transition-colors hover:bg-[var(--accent-hover)]"
+          >
+            Hire Me
+          </a>
         </div>
-
-        {/* CTA Button */}
-        <a
-          href="#contact"
-          className="hidden md:inline-flex items-center gap-2 rounded-full border border-[var(--accent)] px-5 py-2 text-sm font-medium text-[var(--accent)] transition-all duration-300 hover:bg-[var(--accent)] hover:text-[var(--bg-primary)]"
-        >
-          Hire Me
-        </a>
 
         {/* Mobile Toggle */}
         <button
-          className="text-[var(--text-secondary)] md:hidden transition-colors hover:text-[var(--accent)]"
+          className="text-zinc-400 lg:hidden"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -77,33 +66,28 @@ export function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div 
-        className={`md:hidden overflow-hidden transition-all duration-500 ${
-          open ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="border-t border-[var(--border)] bg-[var(--bg-secondary)]/95 backdrop-blur-xl">
+      {open && (
+        <div className="border-t border-zinc-800 bg-black lg:hidden">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="block px-6 py-4 text-sm text-[var(--text-secondary)] transition-all hover:bg-[var(--bg-tertiary)] hover:text-[var(--accent)] hover:pl-8"
+              className="block px-6 py-3 text-sm text-zinc-400 transition-colors hover:bg-zinc-900 hover:text-[var(--accent)]"
             >
               {link.label}
             </a>
           ))}
-          <div className="px-6 py-4">
+          <div className="p-4">
             <a
-              href="#contact"
-              onClick={() => setOpen(false)}
-              className="flex items-center justify-center gap-2 rounded-full border border-[var(--accent)] px-5 py-2 text-sm font-medium text-[var(--accent)]"
+              href="mailto:dicksonkagujje@gmail.com"
+              className="block w-full rounded-lg bg-[var(--accent)] py-3 text-center text-sm font-semibold text-black"
             >
               Hire Me
             </a>
           </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 }
