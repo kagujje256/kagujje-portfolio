@@ -17,19 +17,6 @@
   scrollbar-color: var(--accent) var(--bg-secondary);
 }
 
-*::-webkit-scrollbar {
-  width: 6px;
-}
-
-*::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
-}
-
-*::-webkit-scrollbar-thumb {
-  background: var(--accent);
-  border-radius: 3px;
-}
-
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
@@ -41,20 +28,15 @@ body {
   color: var(--bg-primary);
 }
 
-/* Animation Keyframes */
+/* Classic Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInScale {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+  50% { transform: translateY(-20px) rotate(180deg); opacity: 0.6; }
 }
 
 @keyframes shimmer {
@@ -62,110 +44,86 @@ body {
   100% { background-position: 200% 0; }
 }
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+@keyframes shimmer-bg {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { 
-    box-shadow: 0 0 20px var(--accent)/20;
-    opacity: 1;
-  }
-  50% { 
-    box-shadow: 0 0 40px var(--accent)/40;
-    opacity: 0.8;
-  }
+  0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(201, 168, 76, 0.6); }
 }
 
-@keyframes gradient-flow {
-  0% { background-position: 0% 50%; }
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
-/* Animation Classes */
 .animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
+  animation: fadeIn 0.8s ease-out forwards;
+  opacity: 0;
 }
 
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.animate-fade-in-scale {
-  animation: fadeInScale 0.5s ease-out forwards;
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }
 
 .animate-shimmer {
   background: linear-gradient(90deg, var(--bg-tertiary) 25%, var(--border) 50%, var(--bg-tertiary) 75%);
   background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
+  animation: shimmer 2s infinite;
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+.animate-shimmer-bg {
+  animation: shimmer-bg 3s linear infinite;
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-.animate-gradient-flow {
-  background-size: 200% 200%;
-  animation: gradient-flow 8s ease infinite;
+.animate-gradient {
+  background-size: 200% auto;
+  animation: gradient-shift 3s ease infinite;
 }
 
-/* Glass Effect */
 .glass {
   background: rgba(17, 17, 17, 0.8);
   backdrop-filter: blur(12px);
   border: 1px solid var(--border);
 }
 
-/* Interactive Card Hover */
-.card-interactive {
-  transition: all 0.3s ease;
+/* Luxury text shadow */
+.luxury-text {
+  text-shadow: 0 0 20px rgba(201, 168, 76, 0.5), 0 0 40px rgba(201, 168, 76, 0.3);
 }
 
-.card-interactive:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-}
-
-/* Section Animations */
-.section-animate {
+/* Scroll reveal classes */
+.reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
 }
 
-.section-animate.visible {
+.reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Professional Button Styles */
-.btn-primary {
-  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
-  color: var(--bg-primary);
-  font-weight: 600;
-  transition: all 0.3s ease;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
 }
 
-.btn-primary:hover {
-  transform: scale(1.02);
-  box-shadow: 0 10px 30px rgba(201, 168, 76, 0.3);
-}
-
-.btn-secondary {
+::-webkit-scrollbar-track {
   background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  transition: all 0.3s ease;
 }
 
-.btn-secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
 }
