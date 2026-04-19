@@ -1,33 +1,13 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
-export async function createServerSupabase() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// Hardcoded values - always work
+const SUPABASE_URL = "https://dtejfdquiqogwapjtfar.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR0ZWpmZHF1aXFvZ3dhcGp0ZmFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0NjY5ODAsImV4cCI6MjA5MjA0Mjk4MH0.ptiq8drt1WuBrKv3OMgf6lo8IiJUFqferwnGGWSJksM";
 
-  if (!url || !key || url === "your-supabase-url") {
-    // Return a mock client that returns empty data for build time
-    return {
-      from: () => ({
-        select: () => ({
-          eq: function() { return this; },
-          order: function() { return this; },
-          limit: function() { return this; },
-          single: () => Promise.resolve({ data: null, error: null }),
-          then: (resolve: (value: { data: never[]; error: null }) => void) => resolve({ data: [], error: null }),
-        }),
-      }),
-      storage: {
-        from: () => ({
-          upload: () => Promise.resolve({ error: null }),
-          getPublicUrl: () => ({ data: { publicUrl: "" } }),
-        }),
-      },
-      auth: {
-        getUser: () => Promise.resolve({ data: { user: null }, error: null }),
-      },
-    } as unknown as ReturnType<typeof createServerClient>;
-  }
+export async function createServerSupabase() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL || SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || SUPABASE_ANON_KEY;
 
   const cookieStore = await cookies();
 
