@@ -5,36 +5,36 @@ import { motion, AnimatePresence } from 'framer-motion';
 const slides = [
   {
     id: 1,
-    title: ['Digital', 'Excellence'],
-    subtitle: 'Building the next generation of digital powerhouses.',
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=95&auto=format&fm=webp',
-    topic: 'Innovation'
-  },
-  {
-    id: 2,
-    title: ['Forex', 'Trading'],
-    subtitle: 'Institutional-grade market analysis and strategies.',
+    title: ['Financial', 'Freedom', 'Decoded'],
+    subtitle: 'Expert forex and crypto solutions for wealth building.',
     image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1920&q=95&auto=format&fm=webp',
     topic: 'Finance'
   },
   {
-    id: 3,
-    title: ['Crypto', 'Consulting'],
-    subtitle: 'Strategic guidance for the blockchain era.',
-    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1920&q=95&auto=format&fm=webp',
-    topic: 'Blockchain'
+    id: 2,
+    title: ['Digital', 'Powerhouses'],
+    subtitle: 'Building the next generation of high-performance digital ecosystems.',
+    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=95&auto=format&fm=webp',
+    topic: 'Innovation'
   },
   {
-    id: 4,
-    title: ['Cinematic', 'Production'],
-    subtitle: 'Visual storytelling that captivates and inspires.',
+    id: 3,
+    title: ['Cinematic', 'Storytelling', 'Unleashed'],
+    subtitle: 'Visual narratives that captivate, inspire, and transform.',
     image: 'https://images.unsplash.com/photo-1492691523567-6119e618ef3e?w=1920&q=95&auto=format&fm=webp',
     topic: 'Media'
   },
   {
+    id: 4,
+    title: ['Blockchain', 'Consulting'],
+    subtitle: 'Strategic guidance for navigating the future of decentralized finance.',
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1920&q=95&auto=format&fm=webp',
+    topic: 'Blockchain'
+  },
+  {
     id: 5,
     title: ['Tech', 'Development'],
-    subtitle: 'Engineering solutions for complex digital challenges.',
+    subtitle: 'Engineering robust solutions for the world\'s most complex challenges.',
     image: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=1920&q=95&auto=format&fm=webp',
     topic: 'Technology'
   }
@@ -121,17 +121,17 @@ export default function Hero() {
             </motion.div>
 
             {/* Title */}
-            <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold leading-[0.9] tracking-tighter uppercase">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] font-extrabold leading-[0.85] tracking-tighter uppercase">
               {slide.title.map((line, i) => (
                 <motion.span
                   key={i}
-                  initial={{ clipPath: 'inset(100% 0 0 0)' }}
-                  animate={{ clipPath: 'inset(0% 0 0 0)' }}
-                  transition={{ delay: 0.5 + i * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                  initial={{ clipPath: 'inset(100% 0 0 0)', y: 50 }}
+                  animate={{ clipPath: 'inset(0% 0 0 0)', y: 0 }}
+                  transition={{ delay: 0.5 + i * 0.1, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                   className="block mb-2"
                 >
                   {i === slide.title.length - 1 ? (
-                    <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-white/80 to-white/40">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-white/90 to-white/30">
                       {line}
                     </span>
                   ) : (
