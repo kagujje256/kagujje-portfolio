@@ -1,9 +1,6 @@
-import Navigation from './components/Navigation';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import About from './components/About';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Portfolio from "./pages/portfolio";
+import Admin from "./pages/Admin";
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 
@@ -23,15 +20,11 @@ export default function App() {
   }, []);
 
   return (
-    <div className="bg-black text-white selection:bg-white selection:text-black">
-      <Navigation />
-      <main>
-        <Hero />
-        <Services />
-        <About />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Portfolio />} />
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
