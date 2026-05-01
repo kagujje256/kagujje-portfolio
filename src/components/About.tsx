@@ -27,49 +27,57 @@ export default function About() {
   const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <section id="about" ref={ref} className="relative py-32 bg-black overflow-hidden">
-      {/* Background */}
+    <section id="about" ref={ref} className="relative py-48 bg-black overflow-hidden">
+      {/* Background with Parallax */}
       <motion.div 
         style={{ y }}
-        className="absolute inset-0 opacity-10"
+        className="absolute inset-0 opacity-20 grayscale"
       >
         <img
           src="https://images.unsplash.com/photo-1451187580459-4349027975-89b97f2a6d1b?w=1920&q=80&auto=format"
           alt=""
           className="w-full h-full object-cover"
         />
+        <div className="absolute inset-0 bg-black/60" />
       </motion.div>
 
       <div className="relative max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <span className="text-xs tracking-[0.3em] text-white/40 uppercase">Who We Are</span>
-          <h2 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-            <span className="text-white/90">Building </span>
-            <span className="text-white/40">the Future</span>
-          </h2>
-          <p className="mt-6 text-lg text-white/40 max-w-2xl font-light leading-relaxed">
-            We are a team of innovators, developers, and strategists dedicated to transforming ideas into impactful digital experiences.
-          </p>
-        </motion.div>
+        <div className="grid lg:grid-cols-2 gap-20 items-end mb-32">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="text-[10px] tracking-[0.5em] text-white/30 uppercase">Vision & Philosophy</span>
+            <h2 className="mt-8 text-5xl md:text-7xl font-black tracking-tighter uppercase">
+              Beyond <br />
+              <span className="text-white/20">Expectation</span>
+            </h2>
+          </motion.div>
+          
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="text-base md:text-lg text-white/40 font-normal leading-relaxed tracking-wide"
+          >
+            Kagujje is a global multidisciplinary digital ecosystem. We specialize in engineering high-performance solutions across finance, media, and technology, transforming complex challenges into elegant digital experiences.
+          </motion.p>
+        </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 mb-32">
+        {/* Stats - Refined */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 py-20 border-y border-white/5">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="text-center md:text-left"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.2 + i * 0.1, duration: 0.8 }}
+              className="space-y-2"
             >
-              <div className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.value}</div>
-              <div className="text-sm text-white/40">{stat.label}</div>
+              <div className="text-4xl md:text-6xl font-black text-white tracking-tighter">{stat.value}</div>
+              <div className="text-[10px] font-bold tracking-[0.2em] text-white/20 uppercase">{stat.label}</div>
             </motion.div>
           ))}
         </div>

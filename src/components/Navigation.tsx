@@ -27,31 +27,31 @@ export default function Navigation() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? 'bg-black/80 backdrop-blur-xl' : 'bg-transparent'
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+          isScrolled ? 'bg-black/90 backdrop-blur-2xl py-4' : 'bg-transparent py-8'
         }`}
       >
         <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-12">
             {/* Logo */}
-            <a href="#" className="text-xl font-bold tracking-widest text-white">
-              KAGUJJE
+            <a href="#" className="text-lg font-black tracking-[0.2em] text-white uppercase">
+              Kagujje
             </a>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-12">
+            <div className="hidden md:flex items-center gap-10">
               {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="text-sm tracking-wide text-white/60 hover:text-white transition-colors"
+                  className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/40 hover:text-white transition-all duration-300"
                 >
                   {item.label}
                 </a>
               ))}
               <a
                 href="#contact"
-                className="px-6 py-3 bg-white text-black text-sm font-medium tracking-wide hover:bg-white/90 transition-colors"
+                className="px-8 py-3 bg-white text-black text-[10px] font-black uppercase tracking-[0.2em] hover:scale-105 transition-transform"
               >
                 Let's Talk
               </a>

@@ -5,63 +5,57 @@ import { motion, AnimatePresence } from 'framer-motion';
 const slides = [
   {
     id: 1,
-    title: ['We Build', 'Digital Empires'],
-    subtitle: 'Transform ideas into powerful digital experiences',
-    image: 'https://images.unsplash.com/photo-1451187580459-4349027975-89b97f2a6d1b?w=1920&q=95&auto=format&fm=webp',
-    topic: 'Digital Innovation'
+    title: ['Digital', 'Excellence'],
+    subtitle: 'Building the next generation of digital powerhouses.',
+    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1920&q=95&auto=format&fm=webp',
+    topic: 'Innovation'
   },
   {
     id: 2,
-    title: ['Forex Trading', 'Expertise'],
-    subtitle: 'Expert market analysis for consistent returns',
-    image: 'https://images.unsplash.com/photo-1611974789855-0c27eeb73c25?w=1920&q=95&auto=format&fm=webp',
-    topic: 'Forex'
+    title: ['Forex', 'Trading'],
+    subtitle: 'Institutional-grade market analysis and strategies.',
+    image: 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1920&q=95&auto=format&fm=webp',
+    topic: 'Finance'
   },
   {
     id: 3,
-    title: ['Crypto', 'Investment'],
-    subtitle: 'Navigate crypto markets with expert guidance',
-    image: 'https://images.unsplash.com/photo-1621761193190-e36f7d45b30b?w=1920&q=95&auto=format&fm=webp',
-    topic: 'Crypto'
+    title: ['Crypto', 'Consulting'],
+    subtitle: 'Strategic guidance for the blockchain era.',
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1920&q=95&auto=format&fm=webp',
+    topic: 'Blockchain'
   },
   {
     id: 4,
-    title: ['Movies &', 'Streaming'],
-    subtitle: 'Premium content from around the world',
-    image: 'https://images.unsplash.com/photo-1489599827-2-6b71e5d7f7b1?w=1920&q=95&auto=format&fm=webp',
-    topic: 'Movies'
+    title: ['Cinematic', 'Production'],
+    subtitle: 'Visual storytelling that captivates and inspires.',
+    image: 'https://images.unsplash.com/photo-1492691523567-6119e618ef3e?w=1920&q=95&auto=format&fm=webp',
+    topic: 'Media'
   },
   {
     id: 5,
-    title: ['Tech', 'Solutions'],
-    subtitle: 'Custom software development for modern businesses',
-    image: 'https://images.unsplash.com/photo-1518770664919-447be79de8f3?w=1920&q=95&auto=format&fm=webp',
-    topic: 'Tech'
-  },
-  {
-    id: 6,
-    title: ['Social Media', 'Growth'],
-    subtitle: 'Amplify your brand across all platforms',
-    image: 'https://images.unsplash.com/photo-1611162616305-c8db00cb30ee?w=1920&q=95&auto=format&fm=webp',
-    topic: 'Social'
+    title: ['Tech', 'Development'],
+    subtitle: 'Engineering solutions for complex digital challenges.',
+    image: 'https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=1920&q=95&auto=format&fm=webp',
+    topic: 'Technology'
   }
 ];
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [progress, setProgress] = useState(0);
+  const [direction, setDirection] = useState(1);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const progressRef = useRef<NodeJS.Timeout | null>(null);
-  const SLIDE_DURATION = 6000; // 6 seconds per slide
+  const SLIDE_DURATION = 6000;
 
   // Auto-advance slides
   useEffect(() => {
     intervalRef.current = setInterval(() => {
+      setDirection(1);
       setCurrent((prev) => (prev + 1) % slides.length);
       setProgress(0);
     }, SLIDE_DURATION);
 
-    // Progress bar
     progressRef.current = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) return 0;
@@ -79,15 +73,19 @@ export default function Hero() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Background Images with Crossfade */}
-      <AnimatePresence mode="wait">
+      {/* Background Images with Cinematic Transition */}
+      <AnimatePresence initial={false} mode="popLayout" custom={direction}>
         <motion.div
           key={slide.id}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
-          className="absolute inset-0"
+          initial={{ x: '100%', scale: 1.1, opacity: 0 }}
+          animate={{ x: 0, scale: 1, opacity: 1 }}
+          exit={{ x: '-20%', scale: 1.05, opacity: 0 }}
+          transition={{ 
+            duration: 1.4, 
+            ease: [0.16, 1, 0.3, 1], // Custom cinematic cubic-bezier
+            opacity: { duration: 0.8 }
+          }}
+          className="absolute inset-0 z-0"
         >
           <img
             src={slide.image}
@@ -95,7 +93,8 @@ export default function Hero() {
             className="w-full h-full object-cover"
             loading="eager"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
         </motion.div>
       </AnimatePresence>
 
@@ -104,39 +103,39 @@ export default function Hero() {
         <AnimatePresence mode="wait">
           <motion.div
             key={slide.id}
-            initial={{ opacity: 0, y: 60 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             {/* Topic Label */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-6"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="mb-8"
             >
-              <span className="text-xs md:text-sm font-medium tracking-[0.3em] text-white/50 uppercase">
+              <span className="px-3 py-1 text-[10px] md:text-xs font-bold tracking-[0.4em] text-white/90 uppercase border border-white/20 bg-white/5 backdrop-blur-md">
                 {slide.topic}
               </span>
             </motion.div>
 
             {/* Title */}
-            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold leading-tight tracking-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-extrabold leading-[0.9] tracking-tighter uppercase">
               {slide.title.map((line, i) => (
                 <motion.span
                   key={i}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 + i * 0.1, duration: 0.6 }}
-                  className="block"
+                  initial={{ clipPath: 'inset(100% 0 0 0)' }}
+                  animate={{ clipPath: 'inset(0% 0 0 0)' }}
+                  transition={{ delay: 0.5 + i * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                  className="block mb-2"
                 >
                   {i === slide.title.length - 1 ? (
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-br from-white via-white/80 to-white/40">
                       {line}
                     </span>
                   ) : (
-                    <span className="text-white/90">{line}</span>
+                    <span className="text-white">{line}</span>
                   )}
                 </motion.span>
               ))}
@@ -144,10 +143,10 @@ export default function Hero() {
 
             {/* Subtitle */}
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-              className="mt-6 text-lg md:text-xl text-white/50 max-w-xl font-light"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.8 }}
+              className="mt-8 text-base md:text-lg text-white/60 max-w-lg font-normal leading-relaxed tracking-wide"
             >
               {slide.subtitle}
             </motion.p>
@@ -156,64 +155,76 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="mt-10 flex gap-4"
+              transition={{ delay: 1.1 }}
+              className="mt-12 flex items-center gap-8"
             >
-              <button className="px-8 py-4 bg-white text-black text-sm font-medium tracking-wide hover:bg-white/90 transition-colors">
-                Explore Service
+              <button className="group relative px-10 py-5 bg-white text-black text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform overflow-hidden">
+                <span className="relative z-10">Explore Case Study</span>
+                <div className="absolute inset-0 bg-zinc-200 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </button>
-              <button className="px-8 py-4 border border-white/20 text-white text-sm font-medium tracking-wide hover:bg-white/5 transition-colors">
-                View All
+              <button className="text-xs font-bold uppercase tracking-widest text-white/80 hover:text-white transition-colors flex items-center gap-4 group">
+                View Portfolio
+                <div className="w-12 h-px bg-white/20 group-hover:w-20 group-hover:bg-white transition-all duration-500" />
               </button>
             </motion.div>
           </motion.div>
         </AnimatePresence>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-12 left-8 md:left-16 lg:left-24">
-          <div className="flex gap-3">
+        <div className="absolute bottom-16 left-8 md:left-16 lg:left-24 flex items-center gap-6">
+          <div className="flex gap-4">
             {slides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => {
+                  setDirection(i > current ? 1 : -1);
                   setCurrent(i);
                   setProgress(0);
                 }}
-                className={`h-1 transition-all duration-300 ${
-                  i === current 
-                    ? 'w-12 bg-white' 
-                    : 'w-6 bg-white/20 hover:bg-white/40'
-                }`}
-              />
+                className="group relative h-12 w-8 flex items-end pb-2"
+              >
+                <div className={`w-full h-[2px] transition-all duration-500 ${
+                  i === current ? 'bg-white' : 'bg-white/20'
+                }`} />
+                <span className={`absolute top-0 left-0 text-[10px] font-bold transition-all ${
+                  i === current ? 'opacity-100' : 'opacity-0'
+                }`}>
+                  0{i + 1}
+                </span>
+              </button>
             ))}
+          </div>
+          
+          <div className="h-12 w-px bg-white/10 mx-4" />
+          
+          <div className="text-[10px] font-bold tracking-widest text-white/40 uppercase">
+            <span className="text-white">0{current + 1}</span> / 0{slides.length}
           </div>
         </div>
 
-        {/* Progress Bar */}
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-white/10">
-          <motion.div
-            className="h-full bg-white"
-            style={{ width: `${progress}%` }}
-          />
+        {/* Side Progress Text (Vertical) */}
+        <div className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 hidden lg:block">
+          <div className="flex flex-col items-center gap-12">
+            <div className="h-40 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+            <div className="rotate-90 origin-center whitespace-nowrap">
+              <span className="text-[10px] font-bold tracking-[0.5em] text-white/20 uppercase">
+                Kagujje Digital Experience 2026
+              </span>
+            </div>
+            <div className="h-40 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent" />
+          </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-12 right-8 md:right-16 flex flex-col items-center gap-2"
-      >
-        <span className="text-xs tracking-widest text-white/40 uppercase rotate-90 origin-center translate-x-4">
-          Scroll
-        </span>
+      {/* Hero Bottom Progress Bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/5">
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent"
+          className="h-full bg-white/40"
+          initial={{ width: 0 }}
+          animate={{ width: `${progress}%` }}
+          transition={{ duration: 0.1, ease: "linear" }}
         />
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -17,26 +17,26 @@ const links = {
 
 export default function Footer() {
   return (
-    <footer className="relative py-20 bg-black border-t border-white/5">
+    <footer className="relative py-32 bg-black border-t border-white/5">
       <div className="max-w-7xl mx-auto px-8 md:px-16 lg:px-24">
-        <div className="grid md:grid-cols-3 gap-12 md:gap-24 mb-16">
+        <div className="grid md:grid-cols-4 gap-16 md:gap-24 mb-24">
           {/* Brand */}
-          <div>
-            <h3 className="text-xl font-bold tracking-widest text-white mb-4">KAGUJJE</h3>
-            <p className="text-sm text-white/40 leading-relaxed">
-              Building digital experiences that transform businesses and captivate audiences worldwide.
+          <div className="md:col-span-2">
+            <h3 className="text-2xl font-black tracking-[0.3em] text-white uppercase mb-8">Kagujje</h3>
+            <p className="text-base text-white/40 leading-relaxed max-w-sm font-light">
+              Engineering the digital future. We architect high-performance experiences that redefine industries.
             </p>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="text-xs tracking-widest text-white/40 uppercase mb-6">Services</h4>
-            <div className="space-y-3">
+            <h4 className="text-[10px] font-bold tracking-[0.3em] text-white/20 uppercase mb-8">Ecosystem</h4>
+            <div className="space-y-4">
               {links.services.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="block text-sm text-white/60 hover:text-white transition-colors"
+                  className="block text-xs font-medium text-white/40 hover:text-white transition-all duration-300 hover:translate-x-2"
                 >
                   {link.label}
                 </a>
@@ -46,15 +46,15 @@ export default function Footer() {
 
           {/* Social */}
           <div>
-            <h4 className="text-xs tracking-widest text-white/40 uppercase mb-6">Connect</h4>
-            <div className="flex gap-6">
+            <h4 className="text-[10px] font-bold tracking-[0.3em] text-white/20 uppercase mb-8">Global</h4>
+            <div className="grid grid-cols-2 gap-4">
               {links.social.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
                   target="_blank"
                   rel="noopener"
-                  className="text-sm text-white/60 hover:text-white transition-colors"
+                  className="text-xs font-medium text-white/40 hover:text-white transition-all duration-300"
                 >
                   {link.label}
                 </a>
@@ -64,13 +64,20 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-white/30">
-            © 2025 Kagujje. All rights reserved.
-          </p>
-          <p className="text-xs text-white/30">
-            Powered by Groq AI
-          </p>
+        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex items-center gap-8">
+            <p className="text-[10px] font-bold tracking-widest text-white/20 uppercase">
+              © 2026 Kagujje Digital
+            </p>
+            <div className="h-4 w-px bg-white/5" />
+            <p className="text-[10px] font-bold tracking-widest text-white/20 uppercase">
+              Premium Experience
+            </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[10px] font-bold tracking-widest text-white/40 uppercase">All Systems Operational</span>
+          </div>
         </div>
       </div>
     </footer>
