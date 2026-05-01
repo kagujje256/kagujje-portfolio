@@ -1,0 +1,15 @@
+{
+  "name": "kagujje-portfolio",
+  "local_port": 57580,
+  "entrypoint": "bun run dev",
+  "publish": {
+    "label": "kagujje-portfolio",
+    "type": "http",
+    "entrypoint": "bun run prod",
+    "published_port": 54025,
+    "env": {
+      "NODE_ENV": "production",
+      "ZO_CLIENT_IDENTITY_TOKEN": "none"
+    }
+  }
+}
