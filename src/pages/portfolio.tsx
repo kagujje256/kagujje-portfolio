@@ -35,6 +35,12 @@ const slides = [
     topic: "Media"
   },
   {
+    title: ["Ugandan", "Entertainment", "Platform"],
+    subtitle: "UGMovies - Stream the best of Ugandan and East African cinema. Premium entertainment for the region.",
+    image: "https://images.unsplash.com/photo-1489599840318-1b8d36bc1a2c?q=80&w=1920&auto=format&fit=crop",
+    topic: "UGMovies"
+  },
+  {
     title: ["Financial", "freedom", "decoded"],
     subtitle: "Expert forex and crypto solutions for wealth building. Smart tools for the modern investor.",
     image: "https://images.unsplash.com/photo-1611974789855-0c3b8f06e1b9?q=80&w=1920&auto=format&fit=crop",
@@ -88,6 +94,7 @@ const services = [
 ];
 
 const projects = [
+  { name: "UGMOVIES", url: "https://ugmovies.kagujje.com", status: "LIVE", year: "2026" },
   { name: "CHAT28", url: "https://chat28.kagujje.com", status: "LIVE", year: "2024" },
   { name: "MDM28", url: "https://mdm28.kagujje.com", status: "LIVE", year: "2024" },
   { name: "MOVIES", url: "https://movies.kagujje.com", status: "2026", year: "2026" },
